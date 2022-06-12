@@ -1,0 +1,50 @@
+(test_env) vasya@DESKTOP-ACER:~/hw2/clickhouse_starschema$ dbt test -s tag:staging
+14:18:21  1 of 8 START test not_null_customer_C_CUSTKEY .................................. [RUN]
+14:18:22  1 of 8 PASS not_null_customer_C_CUSTKEY ........................................ [PASS in 0.28s]
+14:18:22  2 of 8 START test not_null_lineorder_LO_ORDERKEY ............................... [RUN]
+14:18:22  2 of 8 PASS not_null_lineorder_LO_ORDERKEY ..................................... [PASS in 0.24s]
+14:18:22  3 of 8 START test not_null_part_P_PARTKEY ...................................... [RUN]
+14:18:22  3 of 8 PASS not_null_part_P_PARTKEY ............................................ [PASS in 0.23s]
+14:18:22  4 of 8 START test not_null_supplier_S_SUPPKEY .................................. [RUN]
+14:18:22  4 of 8 PASS not_null_supplier_S_SUPPKEY ........................................ [PASS in 0.23s]
+14:18:22  5 of 8 START test unique_customer_C_CUSTKEY .................................... [RUN]
+14:18:23  5 of 8 PASS unique_customer_C_CUSTKEY .......................................... [PASS in 0.33s]
+14:18:23  6 of 8 START test unique_lineorder_LO_ORDERKEY ................................. [RUN]
+14:18:28  6 of 8 FAIL 25712986 unique_lineorder_LO_ORDERKEY .............................. [FAIL 25712986 in 5.73s]
+14:18:28  7 of 8 START test unique_part_P_PARTKEY ........................................ [RUN]
+14:18:29  7 of 8 PASS unique_part_P_PARTKEY .............................................. [PASS in 0.46s]
+14:18:29  8 of 8 START test unique_supplier_S_SUPPKEY .................................... [RUN]
+14:18:29  8 of 8 PASS unique_supplier_S_SUPPKEY .......................................... [PASS in 0.29s]
+14:18:29  
+14:18:29  Finished running 8 tests in 8.58s.
+14:18:29  
+14:18:29  Completed with 1 error and 0 warnings:
+14:18:29  
+14:18:29  Failure in test unique_lineorder_LO_ORDERKEY (models/staging/schema.yml)
+14:18:29    Got 25712986 results, configured to fail if != 0
+14:18:29  
+14:18:29    compiled SQL at target/compiled/clickhouse_starschema/models/staging/schema.yml/unique_lineorder_LO_ORDERKEY.sql
+14:18:29  
+14:18:29  Done. PASS=7 WARN=0 ERROR=1 SKIP=0 TOTAL=8
+
+(test_env) vasya@DESKTOP-ACER:~/hw2/clickhouse_starschema$ dbt test -s lineorder_flat
+15:40:17  Running with dbt=1.1.0
+15:40:18  Found 5 models, 10 tests, 0 snapshots, 0 analyses, 410 macros, 0 operations, 0 seed files, 4 sources, 0 exposures, 0 metrics
+15:40:18  
+15:40:18  Concurrency: 1 threads (target='dev')
+15:40:18  
+15:40:18  1 of 2 START test not_null_lineorder_flat_LO_STARKEY ........................... [RUN]
+15:40:19  1 of 2 PASS not_null_lineorder_flat_LO_STARKEY ................................. [PASS in 0.36s]
+15:40:19  2 of 2 START test unique_lineorder_flat_LO_STARKEY ............................. [RUN]
+15:40:19  2 of 2 FAIL 88 unique_lineorder_flat_LO_STARKEY ................................ [FAIL 88 in 0.65s]
+15:40:19  
+15:40:19  Finished running 2 tests in 1.68s.
+15:40:19  
+15:40:19  Completed with 1 error and 0 warnings:
+15:40:19  
+15:40:19  Failure in test unique_lineorder_flat_LO_STARKEY (models/star/schema.yml)
+15:40:19    Got 88 results, configured to fail if != 0
+15:40:19  
+15:40:19    compiled SQL at target/compiled/clickhouse_starschema/models/star/schema.yml/unique_lineorder_flat_LO_STARKEY.sql
+15:40:19  
+15:40:19  Done. PASS=1 WARN=0 ERROR=1 SKIP=0 TOTAL=2
