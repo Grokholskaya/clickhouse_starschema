@@ -1,9 +1,6 @@
-# 1. Configure ClickHouse cluster with CLI
+# 1. Configure ClickHouse cluster
 
-`yc managed-clickhouse cluster help`
-
-
-Docs: [yc managed-clickhouse cluster create](https://cloud.yandex.ru/docs/cli/cli-ref/managed-services/managed-clickhouse/cluster/create)
+Кластер создан через консоль
 
 # 2. Configure database connection
 
@@ -16,20 +13,12 @@ clickhouse_starschema:
     dev:
       type: clickhouse
       schema: dbt
-      host: <your_host>
-      port: 9440
-      user: <usr>
+      host: c-<ID>.rw.mdb.yandexcloud.net
+      port: 8443
+      user: user1
       password: <pwd>
       secure: True
 ```      
-
-## **DBeaver** (JDBC)
-
-```
-socket_timeout=300000
-ssl=true
-sslrootcrt=<path_to_cert>
-```
 
 # 3. Configure dbt project & run queries
 
