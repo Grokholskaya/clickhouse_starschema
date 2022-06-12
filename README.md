@@ -5,6 +5,17 @@
 # 2. Configure database connection
 
 ## **dbt**
+Было создано виртуальное окружение через `virtualenv`
+
+```bash
+virtualenv --python=python3 test_env
+source ~/python-envs/test_env/bin/activate
+```
+ туда установлен через pip dbt-core, dbt-clickhouse, коннектор к clickhouse не ставился пока не было установлено
+
+```bash
+sudo apt-get install python3-dev gcc
+```
 
 ```yml
 clickhouse_starschema:
@@ -39,9 +50,9 @@ dbt вылетал минут через 5 с ошибкой, что `Exception:
 Документирование честно не делала
 
 Send results of queries: 
-- Q2.1
-- Q3.3
-- Q4.2
+- [Q2.1](https://github.com/Grokholskaya/clickhouse_starschema/blob/master/results/q1.png)
+- [Q3.3](https://github.com/Grokholskaya/clickhouse_starschema/blob/master/results/Q2.png)
+- [Q4.2](https://github.com/Grokholskaya/clickhouse_starschema/blob/master/results/Q3.png)
 
 # (optional) Creating source tables with dbt macro
 Применила для скрипта `split` и запустила в цикле `run_query`
