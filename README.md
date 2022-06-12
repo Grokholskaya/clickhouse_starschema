@@ -33,7 +33,6 @@ clickhouse_starschema:
 
 # 3. Configure dbt project & run queries
 
-Push Git repo with dbt project to Github:
 При запуске `dbt run -s lineorder`
 dbt вылетал минут через 5 с ошибкой, что `Exception: Table db1.lineorder__dbt_tmp already exist`
 Если в sql для `lineorder` установить LIMIT, то отрабатывает успешно, поэтому сгенерировала таблицу для 1 миллиона записей
