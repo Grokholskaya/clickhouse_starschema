@@ -23,13 +23,20 @@ clickhouse_starschema:
 # 3. Configure dbt project & run queries
 
 Push Git repo with dbt project to Github:
-- external tables to S3
-- sources.yml
-- base tabes
-- wide table
+При запуске `dbt run -s lineorder`
+dbt вылетал минут через 5 с ошибкой, что `Exception: Table db1.lineorder__dbt_tmp already exist`
+Если в sql для `lineorder` установить LIMIT, то отрабатывает успешно, поэтому сгенерировала таблицу для 1 миллиона записей
+
+Так же при генерации lineorder_flat вываливалась ошибка при использовании `dbt_utils.surrogate_key`, применила фильтры для результата, возвращаемого dbt_utils
+https://github.com/Grokholskaya/clickhouse_starschema/blob/master/models/star/lineorder_flat.sql
+
+Ну и еще у меня не сработал codegen, так что сформировала коды для моделей пока вручную
+
 - tests and docs for models
 
-https://clickhouse.tech/docs/en/getting-started/example-datasets/star-schema/
+Тесты использовала стандарные, результаты
+
+Документирование честно не делала
 
 Send results of queries: 
 - Q2.1
@@ -40,3 +47,4 @@ Send results of queries:
 
 `dbt run-operation init_s3_sources`
 Find a way how to cope with error: `Multi-statements are not allowed`
+https://github.com/Grokholskaya/clickhouse_starschema/blob/master/macros/init_s3_sources.sql
