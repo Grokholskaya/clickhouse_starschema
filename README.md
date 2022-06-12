@@ -1,20 +1,53 @@
-<<<<<<< HEAD
-Welcome to your new dbt project!
+# 1. Configure ClickHouse cluster with CLI
 
-### Using the starter project
-
-Try running the following commands:
-- dbt run
-- dbt test
+`yc managed-clickhouse cluster help`
 
 
-### Resources:
-- Learn more about dbt [in the docs](https://docs.getdbt.com/docs/introduction)
-- Check out [Discourse](https://discourse.getdbt.com/) for commonly asked questions and answers
-- Join the [chat](https://community.getdbt.com/) on Slack for live discussions and support
-- Find [dbt events](https://events.getdbt.com) near you
-- Check out [the blog](https://blog.getdbt.com/) for the latest news on dbt's development and best practices
-=======
-# clickhouse_starschema
-OTUS DWH HW2
->>>>>>> clickhouse_starschema/master
+Docs: [yc managed-clickhouse cluster create](https://cloud.yandex.ru/docs/cli/cli-ref/managed-services/managed-clickhouse/cluster/create)
+
+# 2. Configure database connection
+
+## **dbt**
+
+```yml
+clickhouse_starschema:
+  target: dev
+  outputs:
+    dev:
+      type: clickhouse
+      schema: dbt
+      host: <your_host>
+      port: 9440
+      user: <usr>
+      password: <pwd>
+      secure: True
+```      
+
+## **DBeaver** (JDBC)
+
+```
+socket_timeout=300000
+ssl=true
+sslrootcrt=<path_to_cert>
+```
+
+# 3. Configure dbt project & run queries
+
+Push Git repo with dbt project to Github:
+- external tables to S3
+- sources.yml
+- base tabes
+- wide table
+- tests and docs for models
+
+https://clickhouse.tech/docs/en/getting-started/example-datasets/star-schema/
+
+Send results of queries: 
+- Q2.1
+- Q3.3
+- Q4.2
+
+# (optional) Creating source tables with dbt macro
+
+`dbt run-operation init_s3_sources`
+Find a way how to cope with error: `Multi-statements are not allowed`
